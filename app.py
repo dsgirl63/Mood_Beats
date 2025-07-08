@@ -1,9 +1,11 @@
-from flask import Flask , render_template, request , url_for
+from flask import Flask , render_template, request , url_for, jsonify
+from flask_cors import CORS
 import joblib
 import random 
 import os
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 #Load the trained model and label encoder
 model = joblib.load("mood_model.pkl")
 le = joblib.load("label_encoder.pkl")
@@ -68,7 +70,8 @@ def index():
                 
             return render_template("index.html", mood=mood, songs=songs)
         except Exception as e:
-            return f"Error occurred: {e}"
+            # Return JSON error for API use
+            return jsonify({'error': str(e)}), 400
 
     return render_template("index.html", mood=None)
 
