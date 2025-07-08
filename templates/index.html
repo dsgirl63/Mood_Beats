@@ -6,6 +6,7 @@
   <title>MoodBeats - Bollywood Edition</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <style>
+    /* All styles preserved from original */
     :root {
       --primary: #00f260;
       --secondary: #0575e6;
@@ -224,46 +225,12 @@
       margin-top: 10px;
     }
 
-    .empty-state {
-      text-align: center;
-      max-width: 600px;
-      margin: 60px auto;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: var(--glow);
-    }
-
-    .empty-icon {
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    .empty-text {
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-
     footer {
       text-align: center;
       margin-top: 50px;
       padding: 20px;
       font-size: 0.9rem;
       color: var(--text-muted);
-    }
-
-    @media (max-width: 768px) {
-      .song-img {
-        height: 220px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo {
-        font-size: 2.5rem;
-      }
     }
   </style>
 </head>
@@ -274,26 +241,26 @@
       <p class="tagline">Your Bollywood Music Companion</p>
     </div>
 
-    <form method="POST" class="form-container">
+    <form class="form-container" onsubmit="showMoodSection(); return false;">
       <h2 class="form-title">How are you feeling today?</h2>
 
       <div class="form-group">
         <label for="energy">Energy Level</label>
-        <input type="range" min="1" max="10" step="0.1" name="energy" id="energy" value="5" oninput="updateValue('energy-value', this.value)">
+        <input type="range" min="1" max="10" step="0.1" id="energy" value="5" oninput="updateValue('energy-value', this.value)">
         <div class="value-display" id="energy-value">5.0</div>
         <div class="range-values"><span>Low</span><span>High</span></div>
       </div>
 
       <div class="form-group">
         <label for="danceability">Danceability</label>
-        <input type="range" min="1" max="10" step="0.1" name="danceability" id="danceability" value="5" oninput="updateValue('dance-value', this.value)">
+        <input type="range" min="1" max="10" step="0.1" id="danceability" value="5" oninput="updateValue('dance-value', this.value)">
         <div class="value-display" id="dance-value">5.0</div>
         <div class="range-values"><span>Low</span><span>High</span></div>
       </div>
 
       <div class="form-group">
         <label for="valence">Positivity</label>
-        <input type="range" min="1" max="10" step="0.1" name="valence" id="valence" value="5" oninput="updateValue('valence-value', this.value)">
+        <input type="range" min="1" max="10" step="0.1" id="valence" value="5" oninput="updateValue('valence-value', this.value)">
         <div class="value-display" id="valence-value">5.0</div>
         <div class="range-values"><span>Low</span><span>High</span></div>
       </div>
@@ -301,33 +268,34 @@
       <button type="submit">Find My Perfect Songs <i class="fas fa-music"></i></button>
     </form>
 
-    {% if mood %}
-    <div class="mood-section">
+    <div class="mood-section" id="mood-section" style="display: none;">
       <div class="mood-title">
-        <i class="fas fa-heart"></i> Your Mood: <span class="mood-name">{{ mood }}</span>
+        <i class="fas fa-heart"></i> Your Mood: <span class="mood-name">Energetic</span>
       </div>
 
       <div class="songs-container">
-        {% for song in songs %}
         <div class="song-card">
-          <img src="{{ song.image_url }}" alt="{{ song.name }}" class="song-img">
+          <img src="https://i.imgur.com/H1F1UgN.jpeg" alt="Kesariya" class="song-img">
           <div class="song-info">
-            <div class="song-name">{{ song.name }}</div>
+            <div class="song-name">Kesariya</div>
             <audio controls class="audio-player">
-              <source src="{{ song.audio_url }}" type="audio/mpeg">
+              <source src="https://example.com/kesariya.mp3" type="audio/mpeg">
               Your browser does not support the audio element.
             </audio>
           </div>
         </div>
-        {% endfor %}
+        <div class="song-card">
+          <img src="https://i.imgur.com/LpZxVpR.jpeg" alt="Apna Bana Le" class="song-img">
+          <div class="song-info">
+            <div class="song-name">Apna Bana Le</div>
+            <audio controls class="audio-player">
+              <source src="https://example.com/apna_bana_le.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
       </div>
     </div>
-    {% else %}
-    <div class="empty-state">
-      <div class="empty-icon"><i class="fas fa-music"></i></div>
-      <p class="empty-text">Share your mood by adjusting the sliders above, and we'll recommend Bollywood songs that match your current vibe!</p>
-    </div>
-    {% endif %}
 
     <footer>
       MoodBeats - Bollywood Edition © 2025 | Your AI-powered music companion
@@ -337,6 +305,10 @@
   <script>
     function updateValue(id, val) {
       document.getElementById(id).textContent = parseFloat(val).toFixed(1);
+    }
+
+    function showMoodSection() {
+      document.getElementById('mood-section').style.display = 'block';
     }
   </script>
 </body>

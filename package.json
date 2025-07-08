@@ -1,0 +1,29 @@
+{
+  "name": "mood_beats",
+  "version": "1.0.0",
+  "description": "A modern music player app built with React and Vite",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsgirl63/Mood_Beats.git"
+  },
+  "keywords": ["music", "react", "vite", "mood player"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsgirl63/Mood_Beats/issues"
+  },
+  "homepage": "https://github.com/dsgirl63/Mood_Beats#readme",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.3",
+    "@vitejs/plugin-react": "^4.2.1"
+  }
+}
